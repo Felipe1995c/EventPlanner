@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS uplanit_db;
+CREATE DATABASE uplanit_db;
