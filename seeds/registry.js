@@ -2,28 +2,28 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('Budgets', [
+    return queryInterface.bulkInsert('GiftRegistries', [
       {
-        category: 'Food',
-        amount: 500,
+        item: 'Toaster',
+        quantity: 1,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        category: 'Rentals',
-        amount: 300,
+        item: 'Blender',
+        quantity: 2,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        category: 'Supplies',
-        amount: 150,
+        item: 'Cutlery Set',
+        quantity: 1,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        category: 'Entertainment',
-        amount: 400,
+        item: 'Cookware Set',
+        quantity: 1,
         createdAt: new Date(),
         updatedAt: new Date()
       }
@@ -31,6 +31,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('Budgets', null, {});
+    return queryInterface.bulkDelete('GiftRegistries', null, {});
   }
 };
