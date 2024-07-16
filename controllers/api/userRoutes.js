@@ -1,6 +1,7 @@
 const router = require("express").Router();
 // Import the User model from the models folder
-const { User } = require("../../models");
+// const { User } = require("../../models");
+const User = require("../../models/user");
 
 // If a POST request is made to /api/users, a new user is created. The user id and logged in state is saved to the session within the request object.
 router.post("/", async (req, res) => {
@@ -20,6 +21,7 @@ router.post("/", async (req, res) => {
 
 // If a POST request is made to /api/users/login, the function checks to see if the user information matches the information in the database and logs the user in. If correct, the user ID and logged-in state are saved to the session within the request object.
 router.post("/login", async (req, res) => {
+  console.log("Incoming Data: ", req.body)
   try {
     const userData = await User.findOne({ where: { email: req.body.email } });
 
