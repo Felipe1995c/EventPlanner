@@ -1,17 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
-    const dressCodeSelect = document.getElementById('event-dress-code');
+    const dressCodeRadios = document.getElementsByName('event-dress-code');
     const themeNameGroup = document.getElementById('theme-name-group');
 
-    dressCodeSelect.addEventListener('change', () => {
-        if (dressCodeSelect.value === 'themed') {
-            themeNameGroup.style.display = 'block';
-        } else {
-            themeNameGroup.style.display = 'none';
-        }
+    dressCodeRadios.forEach(radio => {
+        radio.addEventListener('change', () => {
+            if (document.getElementById('dress-code-themed').checked) {
+                themeNameGroup.style.display = 'block';
+            } else {
+                themeNameGroup.style.display = 'none';
+            }
+        });
     });
 
-    if (dressCodeSelect.value === 'themed') {
+    if (document.getElementById('dress-code-themed').checked) {
         themeNameGroup.style.display = 'block';
     }
 
@@ -22,8 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
             name: document.getElementById('event-name').value.trim(),
             date: document.getElementById('event-date').value,
             location: document.getElementById('event-location').value.trim(),
-            dress_code: document.getElementById('event-dress-code').value,
-            theme_name: document.getElementById('event-dress-code').value === 'themed' ? document.getElementById('theme-name').value.trim() : '',
+            dress_code: document.querySelector('input[name="event-dress-code"]:checked').value,
+            theme_name: document.getElementById('dress-code-themed').checked ? document.getElementById('theme-name').value.trim() : '',
             budget: document.getElementById('event-budget').value.trim(),
             food: document.getElementById('event-food').value.trim(),
             rentals: document.getElementById('event-rentals').value.trim(),
