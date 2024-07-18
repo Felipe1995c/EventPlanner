@@ -1,3 +1,4 @@
+//enforce strict mode for robust code
 'use strict';
 
 module.exports = {

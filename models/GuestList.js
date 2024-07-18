@@ -1,3 +1,6 @@
+//strict mode for robust code
+'use strict';
+
 // Import parts from sequelize library
 const { Model, DataTypes } = require('sequelize');
 
