@@ -1,8 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const dressCodeRadios = document.getElementsByName('event-dress-code');
+    // elements for dress code selection
+    const dressCode = document.getElementsByName('event-dress-code');
     const themeNameGroup = document.getElementById('theme-name-group');
 
-    dressCodeRadios.forEach(radio => {
+    // elements for budget options
+
+    // elements for food options
+
+    // elements for rental options
+
+    // elements for supplies options
+
+    // elements for entertainment options
+
+
+    dressCode.forEach(radio => {
         radio.addEventListener('change', () => {
             if (document.getElementById('dress-code-themed').checked) {
                 themeNameGroup.style.display = 'block';
