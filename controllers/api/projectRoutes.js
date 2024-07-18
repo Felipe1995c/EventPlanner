@@ -1,7 +1,7 @@
 const router = require('express').Router();
 // Import the Project model from the models folder
 // const { Project } = require('../../models');
-const Event = require('../../models/event');
+// const Event = require('../../models/event');
 
 // If a POST request is made to /api/projects, a new project is created. If there is an error, the function returns with a 400 error. 
 router.post('/', async (req, res) => {

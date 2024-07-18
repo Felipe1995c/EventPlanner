@@ -1,3 +1,4 @@
+//enable strict mode for JavaScript to make code more robust
 'use strict';
 
 module.exports = (sequelize, DataTypes) => {
