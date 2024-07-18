@@ -31,7 +31,7 @@ router.post("/login", async (req, res) => {
         .json({ message: "Incorrect email or password, please try again" });
       return;
     }
-
+//Verify the posted password with the password store in the database
     const validPassword = await userData.checkPassword(req.body.password);
 
     if (!validPassword) {
@@ -40,7 +40,7 @@ router.post("/login", async (req, res) => {
         .json({ message: "Incorrect email or password, please try again" });
       return;
     }
-
+//Crate session variables of the logged in user
     req.session.save(() => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
