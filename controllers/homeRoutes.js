@@ -27,14 +27,12 @@ router.get('/login', (req, res) => {
   // If a session exists, redirect the request to the homepage
   if (req.session.logged_in) {
     res.redirect('/');
-    return;
+    //return;
   }
-
-router.get('/', (req, res) => {
-    res.render('login');
+  res.render('login');
 });
 
-router.get('/', (req, res) => {
+router.get('/profile', (req, res) => {
     res.render('profile');
 });
 
