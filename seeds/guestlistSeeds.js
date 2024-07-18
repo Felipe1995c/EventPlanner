@@ -1,3 +1,6 @@
+//enforce strict mode for robust code
+'use strict';
+
 // Import respective model
 const { GuestList } = require('../models');
 
