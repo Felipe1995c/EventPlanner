@@ -25,6 +25,10 @@ router.get('/', withAuth, async (req, res) => {
   });
 
 
+
+router.get('/', (req, res) => {
+    res.render('login');
+
 router.get('/login', (req, res) => {
   // If a session exists, redirect the request to the homepage
   if (req.session.logged_in) {
@@ -36,6 +40,7 @@ router.get('/login', (req, res) => {
 
 router.get('/profile', (req, res) => {
     res.render('profile');
+
 });
 
 
