@@ -8,14 +8,13 @@
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/styles.css">
-    <title>U-Plan-It!</title>
 </head>
 
 <body>
     <div class="flex-column justify-space-around">
         <header class="display-flex justify-space-between align-center p-2">
             <h1> U-Plan-It! </h1>
-            <nav>
+        {{!-- <nav>
                 <!-- conditionally render login or logout links using handlebars -->
                 {{#if logged_in}}
                 <a href="/profile">profile</a> |
@@ -23,7 +22,8 @@
                 {{else}} <!-- if the user is not logged in, show login link -->
                 <a href="/login">login</a>
                 {{/if}}
-            </nav>
+            </nav> 
+            --}}
         </header>
         <main class="container container-fluid mt-5">
             <img src="/css/images/U-Plan-It-Logo.png" alt="U-Plan-It Logo" style="width: 200px; height: auto;">
