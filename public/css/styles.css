@@ -45,6 +45,37 @@ h2 {
     font-family: cursive;
 }
 
+/* hide the default radio buttons */
+.form-check-input[type="radio"].custom-radio {
+    display: none;
+}
+
+/* style the custom radio buttons */
+.form-check-input[type="radio"].custom-radio + .form-check-label::before {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #000;
+    border-radius: 50%;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+/* style the radio button when it is checked */
+.form-check-input[type="radio"].custom-radio:checked + .form-check-label::before {
+    background-color: var(--olive);
+    border-color: var(--olive); 
+    box-shadow: 0 0 0 2px #000 inset 
+}
+
+/* adjust hover and focus states */
+.form-check-input[type="radio"].custom-radio + .form-check-label:hover::before,
+.form-check-input[type="radio"].custom-radio:focus + .form-check-label::before {
+    border-color: var(--olive);
+    box-shadow: 0 0 0 2px #000 inset;
+}
+
 @media (max-height: 600px) {
     body {
         background: linear-gradient(var(--light), var(--greenishLight), var(--lightGreen), var(--olive));

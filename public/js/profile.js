@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Chart.js initialization
+    // chart.js initialization
     const ctx = document.getElementById('myChart').getContext('2d');
     const data = {
         labels: ['Budget Used', 'Remaining Budget'],
         datasets: [{
             label: 'Budget Distribution',
-            data: [0, 0], // Initial data
+            data: [0, 0], // initial data
             backgroundColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)'],
             hoverOffset: 4
         }]
