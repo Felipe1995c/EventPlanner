@@ -1,0 +1,20 @@
+:root {
+    --light: #f2f9f1;
+    --greenishLight: #ddeedf;
+    --lightGreen: #b6cdbd;
+    --olive: #5c715e;
+}
+
+body {
+    background: linear-gradient(var(--light), var(--greenishLight),var(--lightGreen), var(--olive));
+background-repeat: repeat-x;
+
+}
+
+h1 {
+    text-shadow: black 1px 2px;
+}
+
+img {
+    background-blend-mode: screen;
+}

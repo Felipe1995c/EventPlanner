@@ -1,4 +1,5 @@
-// Model file for user structure
+//strict mode for robust code
+'use strict';
 
 const { Model, DataTypes } = require('sequelize');
 const bcrypt = require('bcrypt');
@@ -19,7 +20,7 @@ User.init(
             primaryKey: true,
             autoIncrement: true,
         },
-        user: {
+        username: {
             type: DataTypes.STRING,
             allowNull: false,
         },
@@ -33,6 +34,14 @@ User.init(
             allowNull: false,
             validate: {
                 len: [8],
+            },
+        },
+        email: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            unique: true,
+            validate: {
+                isEmail: true,
             },
         },
     },
