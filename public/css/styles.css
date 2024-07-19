@@ -43,3 +43,13 @@ h2 {
     flex-wrap: nowrap;
     font-family: cursive;
 }
+
+@media (max-height: 600px) {
+    body {
+        background: linear-gradient(var(--light), var(--greenishLight),var(--lightGreen), var(--olive));
+    background-repeat: repeat-x;
+    overflow:scroll;
+    
+    }
+
+}
