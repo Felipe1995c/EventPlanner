@@ -24,14 +24,10 @@ User.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        // Should we also have an EMAIL field?
-        email: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
         password: {
             type: DataTypes.STRING,
             allowNull: false,
+            isAlphaNumeric: true,
             validate: {
                 len: [8],
             },
@@ -47,17 +43,23 @@ User.init(
     },
     {
         hooks: {
-            beforeCreate: async (newUserData) => {
-                newUserData.password = await bcrypt.hash(newUserData.password, 10);
-                return newUserData;
-            },
+            //creates an object with hashed password after newUserData is created
+          beforeCreate: async (newUserData) => {
+            newUserData.password = await bcrypt.hash(newUserData.password, 10);
+            return newUserData;
+          },
+          //hashes password provided in updatedUserData and then saves it to database
+          beforeUpdate: async (updatedUserData) => {
+            updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
+            return updatedUserData;
+          },
         },
         sequelize,
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'user',
-    }
+        modelName: 'users',
+      }
 );
 
 module.exports = User;
