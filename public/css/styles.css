@@ -18,6 +18,7 @@ h1 {
 
 img {
     background-blend-mode: screen;
+   
 }
 nav a:link {
 color: var(--olive);
@@ -26,4 +27,19 @@ font-size: xx-large;
 font-weight: 600;
 font-family: cursive;
 text-decoration: none;
+}
+h2 {
+    font-family: cursive;
+    text-shadow: black 2px;
+    font-weight: 600;
+}
+
+
+*, ::after, ::before {
+    align-items: center;
+    /* box-sizing: border-box; */
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    font-family: cursive;
 }
