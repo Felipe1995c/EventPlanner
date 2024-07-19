@@ -24,6 +24,11 @@ User.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
+        // Should we also have an EMAIL field?
+        email: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         password: {
             type: DataTypes.STRING,
             allowNull: false,
