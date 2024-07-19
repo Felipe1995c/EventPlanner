@@ -42,6 +42,7 @@ const registerFormHandler = async (event) => {
     });
     console.log("API response: ", response)
     if (response.ok) {
+    //  document.location.replace('/profile');
       document.location.replace('/');
     } else {
       alert('Failed to Register');
