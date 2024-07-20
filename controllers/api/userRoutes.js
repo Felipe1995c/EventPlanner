@@ -9,9 +9,9 @@ router.post("/", async (req, res) => {
   console.log("Incoming Data: ", req.body)
 
   let newUser = {
-    user: req.body.name,
-    email: req.body.email,
-    password: req.body.password
+    username: req.body.name,
+    password: req.body.password,
+    email: req.body.email
   }
   console.log('New User Data: ', newUser)
   try {
@@ -51,7 +51,7 @@ router.post("/login", async (req, res) => {
         .json({ message: "Incorrect email or password, please try again" });
       return;
     }
-//Crate session variables of the logged in user
+//Create session variables of the logged in user
     req.session.save(() => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
@@ -67,7 +67,8 @@ router.post("/login", async (req, res) => {
 router.post("/logout", (req, res) => {
   if (req.session.logged_in) {
     req.session.destroy(() => {
-      res.status(204).end();
+    //  res.status(204).end();
+      res.status(204).redirect('/login');
     });
   } else {
     res.status(404).end();

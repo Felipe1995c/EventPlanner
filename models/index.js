@@ -12,4 +12,4 @@ GuestList.belongsTo(User, {
     foreignKey: 'id'
 });
 
-module.exports = { User, Budget, GuestList}
+module.exports = { User, Budget, GuestList }
