@@ -33,13 +33,13 @@ router.post('/', async (req, res) => {
   }
 });
 
-// If a DELETE request is made to /api/projects/:id, that project is deleted. 
+// If a DELETE request is made to /api/events/:id, that event is deleted. 
 router.delete('/:id', async (req, res) => {
   try {
     const eventData = await Event.destroy({
       where: {
         id: req.params.id,
-        user_id: req.session.user_id,
+        // user_id: req.session.user_id,
       },
     });
 

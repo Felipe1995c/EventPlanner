@@ -14,8 +14,7 @@
         {{#each events as |event|}}
         <div class="row mb-2">
             <div class="col-md-8">
-                <h4><a href="/event/{{event.id}}">{{event.name}}</a></h4>
-                <p>{{event.name}}</p>
+                <h4><a href="/event/{{event.id}}">{{event.event_name}}</a></h4>
                 <p>{{event.date}}</p>
                 <p>{{event.location}}</p>
                 <p>Dress Code: {{event.dress_code}}</p>
@@ -48,5 +47,4 @@
 
 <script src="./js/deleteEvent.js"></script>
 <script src="./js/event.js"></script>
-<script src="./js/profile.js"></script>
 
