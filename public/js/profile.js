@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('loaded');
     // chart.js initialization
     const ctx = document.getElementById('myChart').getContext('2d');
     const data = {
@@ -44,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // show or hide input groups based on radio selection
     const toggleDisplay = (radios, group) => {
+        console.log("Radios: ", radios)
         radios.forEach(radio => {
             radio.addEventListener('change', () => {
                 if (radio.checked && radio.value === 'yes') {
@@ -90,6 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // event listener for form submission
     document.querySelector('.new-event-form').addEventListener('submit', async (event) => {
         event.preventDefault();
+        console.log("Submitting Data");
 
         const budget = document.getElementById('budget-yes').checked ? parseFloat(document.getElementById('event-budget').value.trim()) : 0;
         const totalBudget = 1000; // Assume a total budget value or fetch from user input or settings
@@ -113,6 +116,8 @@ document.addEventListener('DOMContentLoaded', () => {
             entertainment_budget: document.getElementById('entertainment-yes').checked ? document.getElementById('entertainment-budget').value.trim() : ''
         };
 
+        console.log("Form Data: ", newEvent);
+
         // send new event data to server
         const response = await fetch('/api/events', {
             method: 'POST',
@@ -122,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // handle response
         if (response.ok) {
-            document.location.replace('/profile');
+            document.location.replace('/events');
         } else {
             alert('Failed to create event');
         }

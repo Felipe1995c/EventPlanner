@@ -1,29 +1,70 @@
 const registerEventHandler = async (event) => {
-    console.log("Running Register Logic")
+    console.log("Running Event Logic")
     // we want to prevent the DEFAULT BROWSER BEHAVIOR (of refreshing the page)
     event.preventDefault()
     // we need to capture the INPUT DATA
-    const eventName= document.querySelector('event.name').value.trim();
-    const eventDate = document.querySelector('event.date').value.trim();
-    const eventLoction = document.querySelector('event.location').value.trim();
-    const eventDressCode = document.querySelector('event.dress_code').value.trim();
-    const eventTheme = document.querySelector('event.theme_name').value.trim();
-    const eventBudget = document.querySelector('evemt.budget').value.trim();
-    const eventFood = document.querySelector('event.food').value.trim();
-    const eventRentals = document.querySelector('event.rentals').value.trim();
-    const eventSupplies = document.querySelector('event.supplies').value.trim();
-    const eventEntertainment = document.querySelector('event.entertainment').value.trim();
+    const eventName= document.querySelector('#event-name').value.trim();
+    const eventDate = document.querySelector('#event-date').value.trim();
+    const eventLocation = document.querySelector('#event-location').value.trim();
+    const guests = document.querySelector('#guests').value.trim();
+    const eventDressCode = document.querySelector('input[name="event-dress-code"]:checked').value;
+    const eventTheme = document.querySelector('#theme-name').value.trim();
+    const eventBudget = document.querySelector('#budget').value.trim();
+    const eventFood = document.querySelector('input[name="food-option"]:checked').value;
+    const eventRentals = document.querySelector('input[name="rentals-option"]:checked').value;
+    const eventSupplies = document.querySelector('input[name="supplies-option"]:checked').value;
+    const eventEntertainment = document.querySelector('input[name="entertainment-option"]:checked').value;
     // NOW we HAVE data --> Lets SEND it to our SERVER/API 
     // We run a little validation
-    if (name && date && location && dress_code && theme_name && budget && food && rentals && supplies && entertainment) {
-      const response = await fetch('/api/event', {
+  console.log("Form Data:", 
+              eventName, 
+              eventDate, 
+              eventLocation, 
+              guests, 
+              eventDressCode,
+              eventTheme,
+              eventBudget,
+              eventFood,
+              eventRentals,
+              eventSupplies,
+              eventEntertainment
+              );
+
+              console.log("Event Theme: ", eventTheme)
+
+    if (
+      eventName &&
+      eventDate && 
+      eventLocation && 
+      guests &&
+      eventDressCode &&
+      eventTheme &&
+      eventBudget &&
+      eventFood &&
+      eventRentals &&
+     eventSupplies &&
+      eventEntertainment
+      ) {
+       console.log("Data Valid...")
+      const response = await fetch('/api/events', {
         method: 'POST',
-        body: JSON.stringify({ name, date, location, dress_code, theme_name, budget, food, rentals, supplies, entertainment }),
+        body: JSON.stringify({ 
+          eventName, 
+          eventDate, 
+          eventLocation, 
+          guests, 
+          eventDressCode,
+          eventTheme,
+          eventBudget,
+          eventFood,
+          eventRentals,
+          eventSupplies,
+          eventEntertainment }),
         headers: { 'Content-Type': 'application/json' },
       });
       console.log("API response: ", response)
       if (response.ok) {
-        document.location.replace('/');
+        document.location.replace('/events');
       } else {
         alert('Failed to Register Event');
       }
@@ -31,5 +72,5 @@ const registerEventHandler = async (event) => {
   }
   
   document
-    .querySelector('.event-form')
+    .querySelector('.new-event-form')
     .addEventListener('submit', registerEventHandler);

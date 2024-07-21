@@ -18,6 +18,7 @@
                 <!-- conditionally render login or logout links using handlebars -->
                 {{#if logged_in}}
                 <a href="/profile">profile</a> |
+                <a href="/events">events</a> |
                 <button class="no-button" id="logout">logout</button>
                 {{else}} <!-- if the user is not logged in, show login link -->
                 <a href="/login">login</a>

@@ -67,11 +67,20 @@ router.get('/profile', (req, res) => {
 router.get('/events', /*withAuth ,*/ (req, res) => {
     // what do we want to do?
     // we query for events data from the database
-    const eventsData = Event.findAll()
-    // We sanitize and clean the data
-    const events = eventData.map((event) => event.get({ plain: true }));
-    // We need to return something --> The View(handlebar) & Event Data (Context Object Data)
-    res.render('events', { events })
+    Event.findAll()
+         .then(eventData => {
+            //console.log("Data: ", eventData);
+            // We sanitize and clean the data
+            const events = eventData.map((event) => event.get({ plain: true }));
+            console.log("Events Data: ", events);
+            
+            // We need to return something --> The View(handlebar) & Event Data (Context Object Data)
+            res.render('event', { events })
+         })
+         .catch(err => {
+            console.log("error: ", err);
+         });
+    
 });
 
 
