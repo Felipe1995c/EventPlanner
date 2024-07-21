@@ -1,135 +1,187 @@
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('loaded');
-    // chart.js initialization
-    const ctx = document.getElementById('myChart').getContext('2d');
-    const data = {
-        labels: ['Budget Used', 'Remaining Budget'],
-        datasets: [{
-            label: 'Budget Distribution',
-            data: [0, 0], // initial data
-            backgroundColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)'],
-            hoverOffset: 4
-        }]
-    };
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("loaded");
+  // chart.js initialization
+  const ctx = document.getElementById("myChart").getContext("2d");
+  const data = {
+    labels: ["Budget Used", "Remaining Budget"],
+    datasets: [
+      {
+        label: "Budget Distribution",
+        data: [0, 0], // initial data
+        backgroundColor: ["rgb(255, 99, 132)", "rgb(54, 162, 235)"],
+        hoverOffset: 4,
+      },
+    ],
+  };
 
-    const config = {
-        type: 'doughnut',
-        data: data,
-    };
+  const config = {
+    type: "doughnut",
+    data: data,
+  };
 
-    const myChart = new Chart(ctx, config);
+  const myChart = new Chart(ctx, config);
 
-    // elements for dress code selection
-    const dressCodeRadios = document.getElementsByName('event-dress-code');
-    const themeNameGroup = document.getElementById('theme-name-group');
+  // elements for dress code selection
+  const dressCodeRadios = document.getElementsByName("event-dress-code");
+  const themeNameGroup = document.getElementById("theme-name-group");
 
-    // elements for budget options
-    const budgetRadios = document.getElementsByName('budget-option');
-    const budgetAmountGroup = document.getElementById('budget-amount-group');
+  // elements for budget options
+  const budgetRadios = document.getElementsByName("budget-option");
+  const budgetAmountGroup = document.getElementById("budget-amount-group");
 
-    // elements for food options
-    const foodRadios = document.getElementsByName('food-option');
-    const foodBudgetGroup = document.getElementById('food-budget-group');
+  // elements for food options
+  const foodRadios = document.getElementsByName("food-option");
+  const foodBudgetGroup = document.getElementById("food-budget-group");
 
-    // elements for rental options
-    const rentalsRadios = document.getElementsByName('rentals-option');
-    const rentalsBudgetGroup = document.getElementById('rentals-budget-group');
+  // elements for rental options
+  const rentalsRadios = document.getElementsByName("rentals-option");
+  const rentalsBudgetGroup = document.getElementById("rentals-budget-group");
 
-    // elements for supplies options
-    const suppliesRadios = document.getElementsByName('supplies-option');
-    const suppliesBudgetGroup = document.getElementById('supplies-budget-group');
+  // elements for supplies options
+  const suppliesRadios = document.getElementsByName("supplies-option");
+  const suppliesBudgetGroup = document.getElementById("supplies-budget-group");
 
-    // elements for entertainment options
-    const entertainmentRadios = document.getElementsByName('entertainment-option');
-    const entertainmentBudgetGroup = document.getElementById('entertainment-budget-group');
+  // elements for entertainment options
+  const entertainmentRadios = document.getElementsByName(
+    "entertainment-option"
+  );
+  const entertainmentBudgetGroup = document.getElementById(
+    "entertainment-budget-group"
+  );
 
-    // show or hide input groups based on radio selection
-    const toggleDisplay = (radios, group) => {
-        console.log("Radios: ", radios)
-        radios.forEach(radio => {
-            radio.addEventListener('change', () => {
-                if (radio.checked && radio.value === 'yes') {
-                    group.style.display = 'block';
-                } else {
-                    group.style.display = 'none';
-                }
-            });
-        });
-
-        // check initial state
-        if (document.querySelector(`input[name="${radios[0].name}"]:checked`).value === 'yes') {
-            group.style.display = 'block';
+  // show or hide input groups based on radio selection
+  const toggleDisplay = (radios, group) => {
+    radios.forEach((radio) => {
+      radio.addEventListener("change", () => {
+        if (radio.checked && radio.value === "yes") {
+          group.style.display = "block";
         } else {
-            group.style.display = 'none';
+          group.style.display = "none";
         }
-    };
-
-    // toggle display of theme name input based on dress code selection
-    dressCodeRadios.forEach(radio => {
-        radio.addEventListener('change', () => {
-            if (document.getElementById('dress-code-themed').checked) {
-                themeNameGroup.style.display = 'block';
-            } else {
-                themeNameGroup.style.display = 'none';
-            }
-        });
+      });
     });
 
-    // check for dress code
-    if (document.getElementById('dress-code-themed').checked) {
-        themeNameGroup.style.display = 'block';
-    } else {
-        themeNameGroup.style.display = 'none';
-    }
+    // check initial state
+    //TODO: Fix budget input for each radio option
+    // if (
+    //   document.querySelector(`input[name="${radios[0].name}"]:checked`)
+    //     .value === "yes"
+    // ) {
+    //   group.style.display = "block";
+    // } else {
+    //   group.style.display = "none";
+    // }
+  };
 
-    // toggle display for budget, food, rentals, supplies, and entertainment
-    toggleDisplay(budgetRadios, budgetAmountGroup);
-    toggleDisplay(foodRadios, foodBudgetGroup);
-    toggleDisplay(rentalsRadios, rentalsBudgetGroup);
-    toggleDisplay(suppliesRadios, suppliesBudgetGroup);
-    toggleDisplay(entertainmentRadios, entertainmentBudgetGroup);
-
-    // event listener for form submission
-    document.querySelector('.new-event-form').addEventListener('submit', async (event) => {
-        event.preventDefault();
-        console.log("Submitting Data");
-
-        const budget = document.getElementById('budget-yes').checked ? parseFloat(document.getElementById('event-budget').value.trim()) : 0;
-        const totalBudget = 1000; // Assume a total budget value or fetch from user input or settings
-        const remainingBudget = totalBudget - budget;
-
-        myChart.data.datasets[0].data = [budget, remainingBudget];
-        myChart.update();
-
-        // create a new event object
-        const newEvent = {
-            name: document.getElementById('event-name').value.trim(),
-            date: document.getElementById('event-date').value,
-            location: document.getElementById('event-location').value.trim(),
-            guests: document.getElementById('event-guests').value.trim(), // Corrected this line
-            dress_code: document.querySelector('input[name="event-dress-code"]:checked').value,
-            theme_name: document.getElementById('dress-code-themed').checked ? document.getElementById('theme-name').value.trim() : '',
-            budget: document.getElementById('budget-yes').checked ? document.getElementById('event-budget').value.trim() : '',
-            food_budget: document.getElementById('food-yes').checked ? document.getElementById('food-budget').value.trim() : '',
-            rentals_budget: document.getElementById('rentals-yes').checked ? document.getElementById('rentals-budget').value.trim() : '',
-            supplies_budget: document.getElementById('supplies-yes').checked ? document.getElementById('supplies-budget').value.trim() : '',
-            entertainment_budget: document.getElementById('entertainment-yes').checked ? document.getElementById('entertainment-budget').value.trim() : ''
-        };
-
-        console.log("Form Data: ", newEvent);
-
-        // send new event data to server
-        const response = await fetch('/api/events', {
-            method: 'POST',
-            body: JSON.stringify(newEvent),
-            headers: { 'Content-Type': 'application/json' }
-        });
-
-        // handle response
-        if (response.ok) {
-            document.location.replace('/events');
-        } else {
-            alert('Failed to create event');
-        }
+  // toggle display of theme name input based on dress code selection
+  dressCodeRadios.forEach((radio) => {
+    radio.addEventListener("change", () => {
+      if (document.getElementById("dress-code-themed").checked) {
+        themeNameGroup.style.display = "block";
+      } else {
+        themeNameGroup.style.display = "none";
+      }
     });
+  });
+
+  // check for dress code
+  if (document.getElementById("dress-code-themed").checked) {
+    themeNameGroup.style.display = "block";
+  } else {
+    themeNameGroup.style.display = "none";
+  }
+
+  // toggle display for food, rentals, supplies, and entertainment
+  toggleDisplay(foodRadios, foodBudgetGroup);
+  toggleDisplay(rentalsRadios, rentalsBudgetGroup);
+  toggleDisplay(suppliesRadios, suppliesBudgetGroup);
+  toggleDisplay(entertainmentRadios, entertainmentBudgetGroup);
 });
+
+const registerEventHandler = async (event) => {
+  console.log("Running Event Logic");
+  // we want to prevent the DEFAULT BROWSER BEHAVIOR (of refreshing the page)
+  event.preventDefault();
+  // we need to capture the INPUT DATA
+  const eventName = document.querySelector("#event-name").value.trim();
+  const eventDate = document.querySelector("#event-date").value.trim();
+  const eventLocation = document.querySelector("#event-location").value.trim();
+  const guests = document.querySelector("#guests").value.trim();
+  const eventDressCode = document.querySelector(
+    'input[name="event-dress-code"]:checked'
+  ).value;
+  const eventTheme = document.querySelector("#theme-name").value.trim();
+  const eventBudget = document.querySelector("#budget").value.trim();
+  const eventFood = document.querySelector(
+    'input[name="food-option"]:checked'
+  ).value;
+  const eventRentals = document.querySelector(
+    'input[name="rentals-option"]:checked'
+  ).value;
+  const eventSupplies = document.querySelector(
+    'input[name="supplies-option"]:checked'
+  ).value;
+  const eventEntertainment = document.querySelector(
+    'input[name="entertainment-option"]:checked'
+  ).value;
+  // NOW we HAVE data --> Lets SEND it to our SERVER/API
+  // We run a little validation
+  console.log(
+    "Form Data:",
+    eventName,
+    eventDate,
+    eventLocation,
+    guests,
+    eventDressCode,
+    eventTheme,
+    eventBudget,
+    eventFood,
+    eventRentals,
+    eventSupplies,
+    eventEntertainment
+  );
+
+  console.log("Event Theme: ", eventTheme);
+
+  if (
+    eventName &&
+    eventDate &&
+    eventLocation &&
+    guests &&
+    eventDressCode &&
+    eventBudget &&
+    eventFood &&
+    eventRentals &&
+    eventSupplies &&
+    eventEntertainment
+  ) {
+    console.log("Data Valid...");
+    const response = await fetch("/api/events", {
+      method: "POST",
+      body: JSON.stringify({
+        eventName,
+        eventDate,
+        eventLocation,
+        guests,
+        eventDressCode,
+        eventTheme,
+        eventBudget,
+        eventFood,
+        eventRentals,
+        eventSupplies,
+        eventEntertainment,
+      }),
+      headers: { "Content-Type": "application/json" },
+    });
+    console.log("API response: ", response);
+    if (response.ok) {
+      document.location.replace("/events");
+    } else {
+      alert("Failed to Register Event");
+    }
+  }
+};
+
+document
+  .querySelector(".new-event-form")
+  .addEventListener("submit", registerEventHandler);
