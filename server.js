@@ -19,7 +19,7 @@ const PORT = process.env.PORT || 3001;
 const hbs = exhbs.create();
 
 //create session configuration (secret in env)
-const sess = {
+const sess = { 
   secret: process.env.SECRET,
   cookie: {},
   resave: false,
