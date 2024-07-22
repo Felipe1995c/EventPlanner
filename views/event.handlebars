@@ -1,37 +1,40 @@
 <div class="row">
-    <div class="col-auto">
-        <h2> {{user.username}}!</h2> <!-- display the user's name -->
-        <form action="/api/users/logout" method="post">
-            <button type="submit" class="btn btn-primary button">Logout</button>
-            <button type="submit" class="btn btn-primary button">Back</button>
-        </form>
-    </div>
+
+  <div class="col-auto">
+    <h2> {{username}}</h2>
+    <!-- display the user's name -->
+    <form action="/api/users/logout" method="post">
+      <button type="submit">Logout</button>
+    </form>
+    
+  </div>
 </div>
+
 
 {{#if events.length}}
     <div class="col-md-6 event-list">
-        <h3>Upcoming Events:</h3> {{user.event}}<!-- list of upcoming events -->
+        <h3>Upcoming Events:</h3> <!-- list of upcoming events -->
 
         {{#each events as |event|}}
         <div class="row mb-2">
             <div class="col-md-8">
                 <h4><a href="/event/{{event.id}}">{{event.event_name}}</a></h4>
-                <p>{{event.date}}</p>
-                <p>{{event.location}}</p>
-                <p>Dress Code: {{event.dress_code}}</p>
-                {{#if event.theme_name}}
-                <p>Theme: {{event.theme_name}}</p>
+                <p>Event Date: {{event.date}}</p>
+                <p>Location: {{event.location}}</p>
+                <p>Dress Code: {{event.dresscode}}</p>
+                {{#if event.theme}}
+                <p>Theme: {{event.theme}}</p>
                 {{/if}}
                 <p>Budget: ${{event.budget}}</p>
-                <p>Food: {{event.food}}</p>
-                <p>Rentals: {{event.rentals}}</p>
-                <p>Supplies: {{event.supplies}}</p>
-                <p>Entertainment: {{event.entertainment}}</p>
+                <p>Food: ${{event.food}}</p>
+                <p>Rentals: ${{event.rentals}}</p>
+                <p>Supplies: ${{event.supplies}}</p>
+                <p>Entertainment: ${{event.entertainment}}</p>
             </div>
 
             <!-- delete button -->
             <div class="col-md-4">
-                <button class="btn btn-sm btn-danger" data-id="{{event.id}}">DELETE</button>
+                <button class="btn btn-sm btn-danger delete-btn" data-id="{{event.id}}">DELETE</button>
             </div>
         </div>
         {{/each}}
@@ -39,13 +42,13 @@
     {{/if}}
 </div>
 
+
 <div class="row mt-4">
-        <div class="col-md-6">
-            <h3>Budget Distribution</h3>
-            <canvas id="myChart" style="width: 800px; height: 800px;"></canvas>
-        </div>
-    </div>  
+  <div class="col-md-6">
+    <h3>Budget Distribution</h3>
+    <canvas id="myChart" style="width: 800px; height: 800px;"></canvas>
+  </div>
+</div>
 
 <script src="./js/deleteEvent.js"></script>
 <script src="./js/event.js"></script>
-

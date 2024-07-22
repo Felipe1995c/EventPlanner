@@ -1,143 +1,306 @@
 <div class="row">
-    <div class="col-auto">
-        <h2>Welcome, {{user.username}}!</h2> <!-- display the user's name -->
-        
-        <form action="/api/users/logout" method="post">
-            <button type="submit" class="btn btn-primary button">Logout</button>
-        </form>
-    </div>
+
+  <div class="col-auto">
+    <h2>Welcome, {{user.username}}!</h2>
+    <!-- display the user's name -->
+   
+    <form action="/api/users/logout" method="post">
+      <button type="submit">Logout</button>
+    </form>
+  </div>
+
 </div>
 
 <div class="row mt-4">
+  <div class="col-md-6">
+    <h3>Create a New Event:</h3>
+    <!-- form to create a new event -->
+
+    <form class="form new-event-form">
+      <div class="form-group">
+        <label for="event-name">Event Name:</label>
+        <input
+          class="form-input"
+          type="text"
+          id="event-name"
+          name="event-name"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="event-date">Event Date:</label>
+        <input
+          class="form-input"
+          type="date"
+          id="event-date"
+          name="event-date"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="event-location">Location:</label>
+        <input
+          class="form-input"
+          type="text"
+          id="event-location"
+          name="event-location"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="guests">Number of Guests:</label>
+        <input class="form-input" type="text" id="guests" name="guests" />
+      </div>
+
+      <!-- dress code radio buttons -->
+      <div class="form-group">
+        <label>Dress Code:</label>
+        <div class="form-check">
+          <input
+            class="form-check-input custom-radio"
+            type="radio"
+            name="event-dress-code"
+            id="dress-code-casual"
+            value="casual"
+            checked
+          />
+          <label class="form-check-label" for="dress-code-casual">Casual</label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input custom-radio"
+            type="radio"
+            name="event-dress-code"
+            id="dress-code-formal"
+            value="formal"
+          />
+          <label class="form-check-label" for="dress-code-formal">Formal</label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input custom-radio"
+            type="radio"
+            name="event-dress-code"
+            id="dress-code-themed"
+            value="themed"
+          />
+          <label class="form-check-label" for="dress-code-themed">Themed</label>
+        </div>
+      </div>
+      <!--   <div class="form-group" id="theme-name-group" style="display: none;">  -->
+      <div class="form-group" id="theme-name-group" style="">
+        <label for="theme-name">Theme Name:</label>
+        <input
+          class="form-input"
+          type="text"
+          id="theme-name"
+          name="theme-name"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="event-name">Budget:</label>
+        <input
+          class="form-input"
+          type="text"
+          id="budget"
+          name="budget-option"
+        />
+      </div>
+
+      <!-- food radio buttons -->
+      <div class="form-group">
+        <label>Food:</label>
+        <div class="form-check">
+          <input
+            class="form-check-input custom-radio"
+            type="radio"
+            name="food-option"
+            id="food-yes"
+            value="yes"
+          />
+          <label class="form-check-label" for="food-yes">Yes</label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input custom-radio"
+            type="radio"
+            name="food-option"
+            id="food-no"
+            value="no"
+            checked
+          />
+          <label class="form-check-label" for="food-no">No</label>
+        </div>
+      </div>
+      <div class="form-group" id="food-budget-group" style="display: none;">
+        <label for="food-budget">Food Budget:</label>
+        <input
+          class="form-input"
+          type="number"
+          id="food-budget"
+          name="food-budget"
+        />
+      </div>
+
+      <!-- rental radio buttons -->
+      <div class="form-group">
+        <label>Rentals:</label>
+        <div class="form-check">
+          <input
+            class="form-check-input custom-radio"
+            type="radio"
+            name="rentals-option"
+            id="rentals-yes"
+            value="yes"
+          />
+          <label class="form-check-label" for="rentals-yes">Yes</label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input custom-radio"
+            type="radio"
+            name="rentals-option"
+            id="rentals-no"
+            value="no"
+            checked
+          />
+          <label class="form-check-label" for="rentals-no">No</label>
+        </div>
+      </div>
+      <div class="form-group" id="rentals-budget-group" style="display: none;">
+        <label for="rentals-budget">Rentals Budget:</label>
+        <input
+          class="form-input"
+          type="number"
+          id="rentals-budget"
+          name="rentals-budget"
+        />
+      </div>
+
+      <!-- supplies radio button -->
+      <div class="form-group">
+        <label>Supplies:</label>
+        <div class="form-check">
+          <input
+            class="form-check-input custom-radio"
+            type="radio"
+            name="supplies-option"
+            id="supplies-yes"
+            value="yes"
+          />
+          <label class="form-check-label" for="supplies-yes">Yes</label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input custom-radio"
+            type="radio"
+            name="supplies-option"
+            id="supplies-no"
+            value="no"
+            checked
+          />
+          <label class="form-check-label" for="supplies-no">No</label>
+        </div>
+      </div>
+      <div class="form-group" id="supplies-budget-group" style="display: none;">
+        <label for="supplies-budget">Supplies Budget:</label>
+        <input
+          class="form-input"
+          type="number"
+          id="supplies-budget"
+          name="supplies-budget"
+        />
+      </div>
+
+      <!-- entertainment radio buttons -->
+      <div class="form-group">
+        <label>Entertainment:</label>
+        <div class="form-check">
+          <input
+            class="form-check-input custom-radio"
+            type="radio"
+            name="entertainment-option"
+            id="entertainment-yes"
+            value="yes"
+          />
+          <label class="form-check-label" for="entertainment-yes">Yes</label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input custom-radio"
+            type="radio"
+            name="entertainment-option"
+            id="entertainment-no"
+            value="no"
+            checked
+          />
+          <label class="form-check-label" for="entertainment-no">No</label>
+        </div>
+      </div>
+      <div
+        class="form-group"
+        id="entertainment-budget-group"
+        style="display: none;"
+      >
+        <label for="entertainment-budget">Entertainment Budget:</label>
+        <input
+          class="form-input"
+          type="number"
+          id="entertainment-budget"
+          name="entertainment-budget"
+        />
+      </div>
+
+      <!-- submit button -->
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Create</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="row mt-4">
     <div class="col-md-6">
-        <h3>Create a New Event:</h3> <!-- form to create a new event -->
 
-        <form class="form new-event-form">
-            <div class="form-group">
-                <label for="event-name">Event Name:</label>
-                <input class="form-input" type="text" id="event-name" name="event-name" />
-            </div>
-
-            <div class="form-group">
-                <label for="event-date">Event Date:</label>
-                <input class="form-input" type="date" id="event-date" name="event-date" />
-            </div>
-
-            <div class="form-group">
-                <label for="event-location">Location:</label>
-                <input class="form-input" type="text" id="event-location" name="event-location" />
-            </div>
-
-            <div class="form-group">
-                <label for="guests">Number of Guests:</label>
-                <input class="form-input" type="text" id="guests" name="guests" />
-            </div>
-
-            <!-- dress code radio buttons -->
-            <div class="form-group">
-                <label>Dress Code:</label>
-                <div class="form-check">
-                    <input class="form-check-input custom-radio" type="radio" name="event-dress-code" id="dress-code-casual"
-                        value="casual" checked>
-                    <label class="form-check-label" for="dress-code-casual">Casual</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input custom-radio" type="radio" name="event-dress-code" id="dress-code-formal"
-                        value="formal">
-                    <label class="form-check-label" for="dress-code-formal">Formal</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input custom-radio" type="radio" name="event-dress-code" id="dress-code-themed"
-                        value="themed">
-                    <label class="form-check-label" for="dress-code-themed">Themed</label>
-                </div>
-            </div>
-         <!--   <div class="form-group" id="theme-name-group" style="display: none;">  -->
-            <div class="form-group" id="theme-name-group" style="">
-                <label for="theme-name">Theme Name:</label>
-                <input class="form-input" type="text" id="theme-name" name="theme-name" />
-            </div>
-
-            <div class="form-group">
-                <label for="event-name">Budget:</label>
-                <input class="form-input" type="text" id="budget" name="budget-option" />
-            </div>
-
-            <!-- food radio buttons -->
-            <div class="form-group">
-                <label>Food:</label>
-                <div class="form-check">
-                    <input class="form-check-input custom-radio" type="radio" name="food-option" id="food-yes" value="yes">
-                    <label class="form-check-label" for="food-yes">Yes</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input custom-radio" type="radio" name="food-option" id="food-no" value="no" checked>
-                    <label class="form-check-label" for="food-no">No</label>
-                </div>
-            </div>
-            <div class="form-group" id="food-budget-group" style="display: none;">
-                <label for="food-budget">Food Budget:</label>
-                <input class="form-input" type="number" id="food-budget" name="food-budget" />
-            </div>
-
-            <!-- rental radio buttons -->
-            <div class="form-group">
-                <label>Rentals:</label>
-                <div class="form-check">
-                    <input class="form-check-input custom-radio" type="radio" name="rentals-option" id="rentals-yes" value="yes">
-                    <label class="form-check-label" for="rentals-yes">Yes</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input custom-radio" type="radio" name="rentals-option" id="rentals-no" value="no" checked>
-                    <label class="form-check-label" for="rentals-no">No</label>
-                </div>
-            </div>
-            <div class="form-group" id="rentals-budget-group" style="display: none;">
-                <label for="rentals-budget">Rentals Budget:</label>
-                <input class="form-input" type="number" id="rentals-budget" name="rentals-budget" />
-            </div>
-
-            <!-- supplies radio button -->
-            <div class="form-group">
-                <label>Supplies:</label>
-                <div class="form-check">
-                    <input class="form-check-input custom-radio" type="radio" name="supplies-option" id="supplies-yes" value="yes">
-                    <label class="form-check-label" for="supplies-yes">Yes</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input custom-radio" type="radio" name="supplies-option" id="supplies-no" value="no" checked>
-                    <label class="form-check-label" for="supplies-no">No</label>
-                </div>
-            </div>
-            <div class="form-group" id="supplies-budget-group" style="display: none;">
-                <label for="supplies-budget">Supplies Budget:</label>
-                <input class="form-input" type="number" id="supplies-budget" name="supplies-budget" />
-            </div>
-
-            <!-- entertainment radio buttons -->
-            <div class="form-group">
-                <label>Entertainment:</label>
-                <div class="form-check">
-                    <input class="form-check-input custom-radio" type="radio" name="entertainment-option" id="entertainment-yes" value="yes">
-                    <label class="form-check-label" for="entertainment-yes">Yes</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input custom-radio" type="radio" name="entertainment-option" id="entertainment-no" value="no"
-                        checked>
-                    <label class="form-check-label" for="entertainment-no">No</label>
-                </div>
-            </div>
-            <div class="form-group" id="entertainment-budget-group" style="display: none;">
-                <label for="entertainment-budget">Entertainment Budget:</label>
-                <input class="form-input" type="number" id="entertainment-budget" name="entertainment-budget" />
-            </div>
-
-            <!-- submit button -->
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary button">Create</button>
-            </div>
-        </form>
+      <h3>Budget Distribution</h3>
+      <canvas id="myChart" style="width: 800px; height: 800px;"></canvas>
     </div>
-    
+  </div>
+
+  {{#if events.length}}
+    <div class="col-md-6 event-list">
+      <h3>Upcoming Events:</h3>
+      <!-- list of upcoming events -->
+
+      {{#each events as |event|}}
+        <div class="row mb-2">
+          <div class="col-md-8">
+            <h4><a href="/event/{{event.id}}">{{event.name}}</a></h4>
+            <p>{{event.date}}</p>
+            <p>{{event.location}}</p>
+            <p>Dress Code: {{event.dress_code}}</p>
+            {{#if event.theme_name}}
+              <p>Theme: {{event.theme_name}}</p>
+            {{/if}}
+            <p>Budget: ${{event.budget}}</p>
+            <p>Food: {{event.food}}</p>
+            <p>Rentals: {{event.rentals}}</p>
+            <p>Supplies: {{event.supplies}}</p>
+            <p>Entertainment: {{event.entertainment}}</p>
+          </div>
+
+          <!-- delete button -->
+          <div class="col-md-4">
+            <button
+              class="btn btn-sm btn-danger"
+              data-id="{{event.id}}"
+            >DELETE</button>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  {{/if}}
+</div>
+
 
 <script src="/js/profile.js"></script>

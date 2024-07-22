@@ -107,32 +107,75 @@ const registerEventHandler = async (event) => {
   const eventDate = document.querySelector("#event-date").value.trim();
   const eventLocation = document.querySelector("#event-location").value.trim();
   const guests = document.querySelector("#guests").value.trim();
-  const eventDressCode = document.querySelector('input[name="event-dress-code"]:checked').value;
-  const eventTheme = document.querySelector("#theme-name").value.trim();
+
+  const eventDressCode = document.querySelector(
+    'input[name="event-dress-code"]:checked'
+  ).value;
+  const eventTheme = document
+    .querySelector("#theme-name.form-input")
+    .value.trim();
+
   const eventBudget = document.querySelector("#budget").value.trim();
-  const eventFood = document.querySelector('input[name="food-option"]:checked').value;
-  const eventRentals = document.querySelector('input[name="rentals-option"]:checked').value;
-  const eventSupplies = document.querySelector('input[name="supplies-option"]:checked').value;
-  const eventEntertainment = document.querySelector('input[name="entertainment-option"]:checked').value;
 
-  // validate and send data to server
-  const formData = {
-    eventName,
-    eventDate,
-    eventLocation,
-    guests,
-    eventDressCode,
-    eventTheme,
-    eventBudget,
-    eventFood,
-    eventRentals,
-    eventSupplies,
-    eventEntertainment,
-  };
+  let eventFood = 0;
+  const hasFoodBudget = document.querySelector(
+    'input[name="food-option"]:checked'
+  ).value;
+  if (hasFoodBudget === "yes") {
+    eventFood = document.querySelector('input[name="food-budget"]').value;
+  }
 
-  console.log("Form Data:", formData);
+  let eventRentals = 0;
+  const hasRentalBudget = document.querySelector(
+    'input[name="rentals-option"]:checked'
+  ).value;
+  if (hasRentalBudget === "yes") {
+    eventRentals = document.querySelector('input[name="rentals-budget"]').value;
+  }
 
-  if (eventName && eventDate && eventLocation && guests && eventDressCode && eventBudget && eventFood && eventRentals && eventSupplies && eventEntertainment) {
+  let eventSupplies = 0;
+  const hasSuppliesBudget = document.querySelector(
+    'input[name="supplies-option"]:checked'
+  ).value;
+  if (hasSuppliesBudget === "yes") {
+    eventSupplies = document.querySelector('input[name="supplies-budget"]').value;
+  }
+  let eventEntertainment = 0;
+  const hasEntertainmentBudget = document.querySelector(
+    'input[name="entertainment-option"]:checked'
+  ).value;
+  if (hasEntertainmentBudget === "yes") {
+    eventEntertainment = document.querySelector('input[name="entertainment-budget"]').value;
+  }
+  // NOW we HAVE data --> Lets SEND it to our SERVER/API
+  // We run a little validation
+  // console.log(
+  //   "Form Data:",
+  //   eventName,
+  //   eventDate,
+  //   eventLocation,
+  //   guests,
+  //   eventDressCode,
+  //   eventTheme,
+  //   eventBudget,
+  //   eventFood,
+  //   eventRentals,
+  //   eventSupplies,
+  //   eventEntertainment
+  // );
+  console.log("Food: " + eventFood);
+  console.log("Rentals: " + eventRentals);
+  console.log("Supplies: " + eventSupplies);
+  console.log("Entertainment: " + eventEntertainment);
+  if (
+    eventName &&
+    eventDate &&
+    eventLocation &&
+    guests &&
+    eventDressCode &&
+    eventBudget
+  ) {
+
     console.log("Data Valid...");
     const response = await fetch("/api/events", {
       method: "POST",
