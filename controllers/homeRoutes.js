@@ -57,33 +57,50 @@ router.get("/login", (req, res) => {
 });
 
 //profile page once authenticated
-router.get("/profile", (req, res) => {
-  res.render("profile");
+router.get("/profile", withAuth, async (req, res) => {
+  try {
+    // Find the logged in user based on the session ID
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ["password"] },
+    });
+
+    const user = userData.get({ plain: true });
+
+    res.render("profile", {
+      user,
+      logged_in: true,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
-router.get(
-  "/events",
-  /*withAuth ,*/ (req, res) => {
-    // what do we want to do?
-    // we query for events data from the database
-    Event.findAll()
-      .then((eventData) => {
-        //console.log("Data: ", eventData);
-        // We sanitize and clean the data
-        let events = eventData.map((event) => event.get({ plain: true }));
+router.get("/events", withAuth, async (req, res) => {
+  try {
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ["password"] },
+      include: [{ model: Event }],
+    });
 
-        events = events.filter(
-          (event) => req.session.user_id === event.user_id
-        );
-        console.log("Events Data: ", events);
+    const user = userData.get({ plain: true });
 
-        // We need to return something --> The View(handlebar) & Event Data (Context Object Data)
-        res.render("event", { events });
-      })
-      .catch((err) => {
-        console.log("error: ", err);
-      });
+    console.log(user);
+
+    // // what do we want to do?
+    // // we query for events data from the database
+    // const events = await Event.findAll();
+
+    // // We sanitize and clean the data
+    // events = eventData.map((event) => event.get({ plain: true }));
+
+    // //Filtering by user ID
+    // events = events.filter((event) => req.session.user_id === event.user_id);
+
+    // We need to return something --> The View(handlebar) & Event Data (Context Object Data)
+    res.render("event", { events: user.events, username: user.username });
+  } catch (err) {
+    res.status(500).json(err);
   }
-);
+});
 
 module.exports = router;

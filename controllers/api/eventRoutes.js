@@ -1,11 +1,10 @@
-const router = require('express').Router();
+const router = require("express").Router();
 // Import the Project model from the models folder
-const { Event } = require('../../models');
+const { Event } = require("../../models");
 
-
-// If a POST request is made to /api/events, a new Event is created. If there is an error, the function returns with a 400 error. 
-router.post('/', async (req, res) => {
-  console.log("Incoming Data: ", req.body)
+// If a POST request is made to /api/events, a new Event is created. If there is an error, the function returns with a 400 error.
+router.post("/", async (req, res) => {
+  console.log("Incoming Data: ", req.body);
 
   // Restructure the incoming data for submission to our Database(MODEL)
   let dataObj = {
@@ -21,11 +20,11 @@ router.post('/', async (req, res) => {
     entertainment: req.body.eventEntertainment,
     // Add any Addtional Data to our Object
     user_id: req.session.user_id,
-  }
+  };
   try {
-  //  const newobj = new Event(dataObj)
+    //  const newobj = new Event(dataObj)
     const newEvent = await Event.create(dataObj);
-    console.log("Event Created: ", newEvent)
+    console.log("Event Created: ", newEvent);
     res.status(200).json(newEvent);
   } catch (err) {
     console.log("Error: ", err);
@@ -33,8 +32,8 @@ router.post('/', async (req, res) => {
   }
 });
 
-// If a DELETE request is made to /api/events/:id, that event is deleted. 
-router.delete('/:id', async (req, res) => {
+// If a DELETE request is made to /api/events/:id, that event is deleted.
+router.delete("/:id", async (req, res) => {
   try {
     const eventData = await Event.destroy({
       where: {
@@ -44,12 +43,13 @@ router.delete('/:id', async (req, res) => {
     });
 
     if (!eventData) {
-      res.status(404).json({ message: 'No project found with this id!' });
+      res.status(404).json({ message: "No project found with this id!" });
       return;
     }
 
-    res.status(200).json(projectData);
+    res.status(200).json(eventData);
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });
