@@ -48,8 +48,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const suppliesBudgetGroup = document.getElementById("supplies-budget-group");
 
   // elements for entertainment options
-  const entertainmentRadios = document.getElementsByName("entertainment-option");
-  const entertainmentBudgetGroup = document.getElementById("entertainment-budget-group");
+  const entertainmentRadios = document.getElementsByName(
+    "entertainment-option"
+  );
+  const entertainmentBudgetGroup = document.getElementById(
+    "entertainment-budget-group"
+  );
 
   // function to toggle display of input groups based on radio selection
   const toggleDisplay = (radios, group) => {
@@ -64,7 +68,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // check initial state
-    const checkedRadio = document.querySelector(`input[name="${radios[0].name}"]:checked`);
+    const checkedRadio = document.querySelector(
+      `input[name="${radios[0].name}"]:checked`
+    );
     if (checkedRadio && checkedRadio.value === "yes") {
       group.style.display = "block";
     } else {
@@ -138,35 +144,35 @@ const registerEventHandler = async (event) => {
     'input[name="supplies-option"]:checked'
   ).value;
   if (hasSuppliesBudget === "yes") {
-    eventSupplies = document.querySelector('input[name="supplies-budget"]').value;
+    eventSupplies = document.querySelector(
+      'input[name="supplies-budget"]'
+    ).value;
   }
   let eventEntertainment = 0;
   const hasEntertainmentBudget = document.querySelector(
     'input[name="entertainment-option"]:checked'
   ).value;
   if (hasEntertainmentBudget === "yes") {
-    eventEntertainment = document.querySelector('input[name="entertainment-budget"]').value;
+    eventEntertainment = document.querySelector(
+      'input[name="entertainment-budget"]'
+    ).value;
   }
   // NOW we HAVE data --> Lets SEND it to our SERVER/API
   // We run a little validation
-  // console.log(
-  //   "Form Data:",
-  //   eventName,
-  //   eventDate,
-  //   eventLocation,
-  //   guests,
-  //   eventDressCode,
-  //   eventTheme,
-  //   eventBudget,
-  //   eventFood,
-  //   eventRentals,
-  //   eventSupplies,
-  //   eventEntertainment
-  // );
-  console.log("Food: " + eventFood);
-  console.log("Rentals: " + eventRentals);
-  console.log("Supplies: " + eventSupplies);
-  console.log("Entertainment: " + eventEntertainment);
+  const formData = {
+    eventName,
+    eventDate,
+    eventLocation,
+    guests,
+    eventDressCode,
+    eventTheme,
+    eventBudget,
+    eventFood,
+    eventRentals,
+    eventSupplies,
+    eventEntertainment,
+  };
+
   if (
     eventName &&
     eventDate &&
@@ -175,7 +181,6 @@ const registerEventHandler = async (event) => {
     eventDressCode &&
     eventBudget
   ) {
-
     console.log("Data Valid...");
     const response = await fetch("/api/events", {
       method: "POST",
@@ -195,4 +200,6 @@ const registerEventHandler = async (event) => {
   }
 };
 
-document.querySelector(".new-event-form").addEventListener("submit", registerEventHandler);
+document
+  .querySelector(".new-event-form")
+  .addEventListener("submit", registerEventHandler);
