@@ -5,11 +5,11 @@ const GuestList = require("./GuestList");
 const Event = require("./event");
 
 Budget.belongsTo(User, {
-  foreignKey: "id",
+  foreignKey: "user_id",
 });
 
 GuestList.belongsTo(User, {
-  foreignKey: "id",
+  foreignKey: "user_id",
 });
 
 User.hasMany(Event, {
