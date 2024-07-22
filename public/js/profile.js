@@ -1,25 +1,31 @@
 document.addEventListener("DOMContentLoaded", () => {
   console.log("loaded");
+
   // chart.js initialization
-  const ctx = document.getElementById("myChart").getContext("2d");
-  const data = {
-    labels: ["Budget Used", "Remaining Budget"],
-    datasets: [
-      {
-        label: "Budget Distribution",
-        data: [0, 0], // initial data
-        backgroundColor: ["rgb(255, 99, 132)", "rgb(54, 162, 235)"],
-        hoverOffset: 4,
-      },
-    ],
-  };
+  const chartElement = document.getElementById("myChart");
+  if (chartElement) {
+    const ctx = chartElement.getContext("2d");
+    const data = {
+      labels: ["Budget Used", "Remaining Budget"],
+      datasets: [
+        {
+          label: "Budget Distribution",
+          data: [0, 0], // initial data
+          backgroundColor: ["rgb(255, 99, 132)", "rgb(54, 162, 235)"],
+          hoverOffset: 4,
+        },
+      ],
+    };
 
-  const config = {
-    type: "doughnut",
-    data: data,
-  };
+    const config = {
+      type: "doughnut",
+      data: data,
+    };
 
-  const myChart = new Chart(ctx, config);
+    const myChart = new Chart(ctx, config);
+  } else {
+    console.error("Element with id 'myChart' not found");
+  }
 
   // elements for dress code selection
   const dressCodeRadios = document.getElementsByName("event-dress-code");
@@ -42,14 +48,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const suppliesBudgetGroup = document.getElementById("supplies-budget-group");
 
   // elements for entertainment options
-  const entertainmentRadios = document.getElementsByName(
-    "entertainment-option"
-  );
-  const entertainmentBudgetGroup = document.getElementById(
-    "entertainment-budget-group"
-  );
+  const entertainmentRadios = document.getElementsByName("entertainment-option");
+  const entertainmentBudgetGroup = document.getElementById("entertainment-budget-group");
 
-  // show or hide input groups based on radio selection
+  // function to toggle display of input groups based on radio selection
   const toggleDisplay = (radios, group) => {
     radios.forEach((radio) => {
       radio.addEventListener("change", () => {
@@ -62,15 +64,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // check initial state
-    //TODO: Fix budget input for each radio option
-    // if (
-    //   document.querySelector(`input[name="${radios[0].name}"]:checked`)
-    //     .value === "yes"
-    // ) {
-    //   group.style.display = "block";
-    // } else {
-    //   group.style.display = "none";
-    // }
+    const checkedRadio = document.querySelector(`input[name="${radios[0].name}"]:checked`);
+    if (checkedRadio && checkedRadio.value === "yes") {
+      group.style.display = "block";
+    } else {
+      group.style.display = "none";
+    }
   };
 
   // toggle display of theme name input based on dress code selection
@@ -100,13 +99,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const registerEventHandler = async (event) => {
   console.log("Running Event Logic");
-  // we want to prevent the DEFAULT BROWSER BEHAVIOR (of refreshing the page)
+  // prevent default behavior
   event.preventDefault();
-  // we need to capture the INPUT DATA
+
+  // capture input data
   const eventName = document.querySelector("#event-name").value.trim();
   const eventDate = document.querySelector("#event-date").value.trim();
   const eventLocation = document.querySelector("#event-location").value.trim();
   const guests = document.querySelector("#guests").value.trim();
+
   const eventDressCode = document.querySelector(
     'input[name="event-dress-code"]:checked'
   ).value;
@@ -174,33 +175,24 @@ const registerEventHandler = async (event) => {
     eventDressCode &&
     eventBudget
   ) {
+
     console.log("Data Valid...");
     const response = await fetch("/api/events", {
       method: "POST",
-      body: JSON.stringify({
-        eventName,
-        eventDate,
-        eventLocation,
-        guests,
-        eventDressCode,
-        eventTheme,
-        eventBudget,
-        eventFood,
-        eventRentals,
-        eventSupplies,
-        eventEntertainment,
-      }),
+      body: JSON.stringify(formData),
       headers: { "Content-Type": "application/json" },
     });
     console.log("API response: ", response);
     if (response.ok) {
       document.location.replace("/events");
     } else {
+      const errorResponse = await response.json();
+      console.error("Server error response:", errorResponse);
       alert("Failed to Register Event");
     }
+  } else {
+    alert("Please fill in all fields.");
   }
 };
 
-document
-  .querySelector(".new-event-form")
-  .addEventListener("submit", registerEventHandler);
+document.querySelector(".new-event-form").addEventListener("submit", registerEventHandler);

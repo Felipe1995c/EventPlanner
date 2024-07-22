@@ -35,6 +35,10 @@ h2 {
     font-family: cursive;
     text-shadow: black 2px;
     font-weight: 600;
+    margin-top: 10px;
+    text-align: center;
+    white-space: nowrap;
+    display: inline-block;
 }
 
 *, ::after, ::before {
@@ -43,6 +47,10 @@ h2 {
     flex-direction: column;
     flex-wrap: nowrap;
     font-family: cursive;
+}
+
+h3 {
+    text-align: center;
 }
 
 /* hide the default radio buttons */
@@ -74,6 +82,22 @@ h2 {
 .form-check-input[type="radio"].custom-radio:focus + .form-check-label::before {
     border-color: var(--olive);
     box-shadow: 0 0 0 2px #000 inset;
+}
+
+.button {
+    background-color: var(--light);
+    color: black;
+    font-size: 14px;
+    padding: 5px 10px;
+    margin-top: 10px; /* added margin-top */
+    border-radius: 50px;
+    border: 2px solid var(--olive);
+    transition-duration: 0.4s;
+}
+
+.button:hover {
+    background-color: var(--greenishLight);
+    color: black;
 }
 
 @media (max-height: 600px) {
