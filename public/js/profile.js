@@ -1,31 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   console.log("loaded");
-
-  // chart.js initialization
-  const chartElement = document.getElementById("myChart");
-  if (chartElement) {
-    const ctx = chartElement.getContext("2d");
-    const data = {
-      labels: ["Budget Used", "Remaining Budget"],
-      datasets: [
-        {
-          label: "Budget Distribution",
-          data: [0, 0], // initial data
-          backgroundColor: ["rgb(255, 99, 132)", "rgb(54, 162, 235)"],
-          hoverOffset: 4,
-        },
-      ],
-    };
-
-    const config = {
-      type: "doughnut",
-      data: data,
-    };
-
-    const myChart = new Chart(ctx, config);
-  } else {
-    console.error("Element with id 'myChart' not found");
-  }
+ 
 
   // elements for dress code selection
   const dressCodeRadios = document.getElementsByName("event-dress-code");
