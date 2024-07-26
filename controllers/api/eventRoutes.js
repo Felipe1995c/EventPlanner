@@ -1,8 +1,17 @@
 const router = require("express").Router();
-// Import the Project model from the models folder
 const { Event } = require("../../models");
 
-// If a POST request is made to /api/events, a new Event is created. If there is an error, the function returns with a 400 error.
+// GET all events
+router.get('/', async (req, res) => {
+  try {
+    const eventsData = await Event.findAll();
+    res.status(200).json(eventsData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// POST a new event
 router.post("/", async (req, res) => {
   console.log("Incoming Data: ", req.body);
 
@@ -18,11 +27,9 @@ router.post("/", async (req, res) => {
     rentals: req.body.eventRentals,
     supplies: req.body.eventSupplies,
     entertainment: req.body.eventEntertainment,
-    // Add any Addtional Data to our Object
     user_id: req.session.user_id,
   };
   try {
-    //  const newobj = new Event(dataObj)
     const newEvent = await Event.create(dataObj);
     console.log("Event Created: ", newEvent);
     res.status(200).json(newEvent);
@@ -32,18 +39,17 @@ router.post("/", async (req, res) => {
   }
 });
 
-// If a DELETE request is made to /api/events/:id, that event is deleted.
+// DELETE an event by ID
 router.delete("/:id", async (req, res) => {
   try {
     const eventData = await Event.destroy({
       where: {
         id: req.params.id,
-        // user_id: req.session.user_id,
       },
     });
 
     if (!eventData) {
-      res.status(404).json({ message: "No project found with this id!" });
+      res.status(404).json({ message: "No event found with this id!" });
       return;
     }
 
@@ -55,3 +61,4 @@ router.delete("/:id", async (req, res) => {
 });
 
 module.exports = router;
+
